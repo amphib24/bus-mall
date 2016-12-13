@@ -16,9 +16,22 @@ function Images (filepath,name){
   allProducts.push(this);
 };
 function imagePlacement(){
-  left.src = allProducts [Math.floor(Math.random() * 20)].location;
-  center.src = allProducts [Math.floor(Math.random() * 20)].location;
-  right.src = allProducts[Math.floor(Math.random () * 20)].location ;
+  var lefty = allProducts [Math.floor(Math.random() * 20)];
+  var centre = allProducts [Math.floor(Math.random() * 20)];
+  var righty = allProducts [Math.floor(Math.random() * 20)];
+
+  left.src = lefty.location;
+  center.src = centre.location;
+  right.src = righty.location;
+while(lefty === centre || lefty === righty){
+  lefty = allProducts [Math.floor(Math.random() * 20)];
+}
+while(centre === righty || centre === lefty){
+  var centre = allProducts [Math.floor(Math.random() * 20)];
+}
+while(righty === centre || righty === lefty){
+  righty = allProducts [Math.floor(Math.random() * 20)];
+}
 }
 
 new Images ('images/babysweep.jpg', 'baby');
