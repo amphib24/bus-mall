@@ -27,15 +27,15 @@ function imagePlacement(){
   right.src = righty.location;
 
 
-if(lefty !== centre || lefty !== righty){
-  return (lefty);
-};
-if(centre !== righty || centre !== lefty){
-  return (centre);
-};
-if(righty !== centre || righty !== lefty){
-  return (righty);
-};
+if(lefty === centre || lefty === righty){
+  return (allProducts[lefty]);
+}
+if(centre === righty || centre === lefty){
+  return (allProducts[centre]);
+}
+if(righty === centre || righty === lefty){
+  return (allProducts[righty]);
+}
 }
 function clickHandler(event){
   event.preventDefault();
