@@ -32,31 +32,14 @@ function Product(name) {
   allProducts.push(this);
 }
 
-
-
-// Instances
-// -----------------
-// new Product ('bag');
-// new Product ('banana');
-
 for(var i = 0; i < names.length; i++) {
   new Product(names[i]);
 }
 // console.table(allProducts);
-
-// ++++++++++++++++++++++++++++
-// ++++++++++++++++++++++++++++
-// DECLARE FUNCTIONS
-// (DEFINE ACTIONS)
-// ++++++++++++++++++++++++++++
-// ++++++++++++++++++++++++++++
-
 function rand() {
   return Math.floor(Math.random() * allProducts.length);
   // generate a random number between 0 and allProducts.length
 }
-
-
 
 function makeArrayOfThreeNumbers() {
   oldArray[0] = newArray[0];
@@ -86,7 +69,6 @@ function makeArrayOfThreeNumbers() {
   }
 }
 
-
 function showThreePics() {
   makeArrayOfThreeNumbers();
   left.src = allProducts[newArray[0]].filepath;
@@ -95,8 +77,6 @@ function showThreePics() {
   allProducts[newArray[1]].views += 1;
   right.src = allProducts[newArray[2]].filepath;
   allProducts[newArray[2]].views += 1;
-
-  // this will place three new images on the page
 }
 
 function renderList() {
@@ -106,20 +86,20 @@ function renderList() {
 function handleClick(event) {
   event.preventDefault();
   //id who was clicked
-  console.log(event.target.src, 'was clicked');
+  // console.log(event.target.src, 'was clicked');
   // alert for clicks not on images
-//   if (event.target.id = 'pic-container'){
-//     return alert ( 'Click on the image!!!!! Not the background!!!!');
-// }
-  if(event.target.id = 'left'){
+  if (event.target.id === 'pic-container'){
+    return alert ( 'Click on the image!!!!! Not the background!!!!');
+}
+  if(event.target.id === 'left'){
   allProducts[newArray[0]].clicks += 1;
 console.log(allProducts[newArray[0]]);
 };
-if(event.target.id = 'center'){
+if(event.target.id === 'center'){
 allProducts[newArray[1]].clicks += 1;
 console.log(allProducts[newArray[1]]);
 };
-if(event.target.id = 'right'){
+if(event.target.id === 'right'){
 allProducts[newArray[2]].clicks += 1;
 console.log(allProducts[newArray[2]]);
 };
@@ -138,12 +118,6 @@ console.log(allProducts[newArray[2]]);
   showThreePics();
   // console.log(event.target, 'was clicked');
 }
-// ++++++++++++++++++++++++++++
-// ++++++++++++++++++++++++++++
-// CODE THAT RUNS ON PAGE LOAD
-// (EXECUTE ACTIONS)
-// ++++++++++++++++++++++++++++
-// ++++++++++++++++++++++++++++
 
 showThreePics();
  picContainer.addEventListener('click', handleClick);

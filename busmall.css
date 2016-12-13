@@ -13,9 +13,13 @@ article {
   font-family:"Comic Sans MS", cursive, sans-serif;
   color:#14FF64
 }
-section ul {
+section{
+  width:800px;
+  margin: 0 auto;
+}
+/*section ul {
   list-style: none;
-  position: relative;
+  position: absolute;
   left:175px;
   width: 800px;
   height:300px;
@@ -24,10 +28,7 @@ section ul {
 
 section ul li{
   display: inline;
-
 }
 section ul li img {
   border: 3px solid #14FF64;
- padding: 15px, 15px;
-
-}
+}*/
