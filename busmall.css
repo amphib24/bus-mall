@@ -15,9 +15,10 @@ article {
 }
 section ul {
   list-style: none;
-  position: absolute;
+  position: relative;
   left:175px;
   width: 800px;
+  height:300px;
   border: solid 3px #14FF64;
 }
 
@@ -25,6 +26,8 @@ section ul li{
   display: inline;
 
 }
-#image_container{
+section ul li img {
+  border: 3px solid #14FF64;
+ padding: 15px, 15px;
 
 }
