@@ -17,10 +17,14 @@ section ul {
   list-style: none;
   position: absolute;
   left:175px;
-  width: 100%;
+  width: 800px;
+  border: solid 3px #14FF64;
 }
 
 section ul li{
   display: inline;
+
+}
+#image_container{
 
 }

@@ -27,33 +27,24 @@ function imagePlacement(){
   right.src = righty.location;
 
 
-if(lefty === centre || lefty === righty){
+if(lefty !== centre || lefty !== righty){
   return (lefty);
 };
-if(centre === righty || centre === lefty){
+if(centre !== righty || centre !== lefty){
   return (centre);
 };
-if(righty === centre || righty === lefty){
+if(righty !== centre || righty !== lefty){
   return (righty);
 };
-
+}
 function clickHandler(event){
   event.preventDefault();
-  var left = event.target.left.value
-  var center = event.target.center.value
-  var right = event.target.right. value
-  var click = event.target.button.click.vlaue
-  if (left === click || center === click || right === click){
-    var newImage = new Image (filepath,name);
-    imagePlacement();
-  }
-  event.target.left.value = null;
-  event.target.center.value = null;
-  event.target. center. value = null;
-  event.target.button.click.vlaue=null;
-
-  }
+  imagePlacement();
+  // left.src = allProducts[i].this.lefty.location;
+  // center.src = allProducts[i].this.centre.location;
+  // right.src = allProducts[i].this.righty.location;
 }
+
 new Images ('images/babysweep.jpg', 'baby');
 new Images ('images/bananacutter.jpg', 'banana');
 new Images ('images/boots.jpg', 'boots');
@@ -77,9 +68,9 @@ new Images ('images/wine-glass.jpg', 'wine');
 
 
 
-
+container.addEventListener('click', clickHandler);
 imagePlacement();
-container.addEventListner('click', clickHandler)
+
 // function selectRandomCrap(){
 //   var randomIndex = Math.floor(Math.random() * allProducts.length);
 //   console.log(allProducts[randomIndex]);
