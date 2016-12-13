@@ -15,6 +15,8 @@ function Images (filepath,name){
 
   allProducts.push(this);
 };
+
+
 function imagePlacement(){
   var lefty = allProducts [Math.floor(Math.random() * 20)];
   var centre = allProducts [Math.floor(Math.random() * 20)];
@@ -23,22 +25,40 @@ function imagePlacement(){
   left.src = lefty.location;
   center.src = centre.location;
   right.src = righty.location;
-while(lefty === centre || lefty === righty){
-  lefty = allProducts [Math.floor(Math.random() * 20)];
-}
-while(centre === righty || centre === lefty){
-  var centre = allProducts [Math.floor(Math.random() * 20)];
-}
-while(righty === centre || righty === lefty){
-  righty = allProducts [Math.floor(Math.random() * 20)];
-}
-}
 
+
+if(lefty === centre || lefty === righty){
+  return (lefty);
+};
+if(centre === righty || centre === lefty){
+  return (centre);
+};
+if(righty === centre || righty === lefty){
+  return (righty);
+};
+
+function clickHandler(event){
+  event.preventDefault();
+  var left = event.target.left.value
+  var center = event.target.center.value
+  var right = event.target.right. value
+  var click = event.target.button.click.vlaue
+  if (left === click || center === click || right === click){
+    var newImage = new Image (filepath,name);
+    imagePlacement();
+  }
+  event.target.left.value = null;
+  event.target.center.value = null;
+  event.target. center. value = null;
+  event.target.button.click.vlaue=null;
+
+  }
+}
 new Images ('images/babysweep.jpg', 'baby');
 new Images ('images/bananacutter.jpg', 'banana');
 new Images ('images/boots.jpg', 'boots');
 new Images ('images/chair.jpg', 'chair');
-new Images ('images/cthulhu.jpg.jpg', 'monster');
+new Images ('images/cthulhu.jpg', 'monster');
 new Images ('images/dog-duck.jpg', 'dog-duck');
 new Images ('images/dragon.jpg', 'dragon');
 new Images ('images/ipadtpholder.jpg', 'ipad');
@@ -55,7 +75,11 @@ new Images ('images/usb-page3.jpg', 'tail');
 new Images ('images/water-can.jpg', 'water');
 new Images ('images/wine-glass.jpg', 'wine');
 
+
+
+
 imagePlacement();
+container.addEventListner('click', clickHandler)
 // function selectRandomCrap(){
 //   var randomIndex = Math.floor(Math.random() * allProducts.length);
 //   console.log(allProducts[randomIndex]);
