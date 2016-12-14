@@ -206,6 +206,10 @@ function handleClick(event) {
   //id who was clicked
   // console.log(event.target.src, 'was clicked');
   // alert for clicks not on images
+  if(clickCounter === 25){
+    picContainer.removeEventListener('click', handleClick)
+  }
+
   if (event.target.id === 'pic-container'){
     return alert ( 'Click on the image!!!!! Not the background!!!!');
 }
@@ -224,7 +228,7 @@ console.log(allProducts[newArray[2]]);
   // tally the click
   clickCounter += 1;
 
-  if (clickCounter >= 25){
+  if (clickCounter === 25){
     renderList();
     myChart.update();
     return alert(' you outa clicks bro');
