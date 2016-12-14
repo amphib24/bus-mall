@@ -232,8 +232,8 @@ console.log(allProducts[newArray[2]]);
     myChart.update();
     return  alert(' you outa clicks bro');
   }
-  else{ (clickCounter === 25){
-    picContainer.removeEventListener("click", handleClick);
+  if (clickCounter === 26){
+    picContainer.removeEventListener('click', handleClick);
   }
 
   // check whether total clicks <25
