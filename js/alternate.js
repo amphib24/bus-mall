@@ -227,7 +227,7 @@ console.log(allProducts[newArray[2]]);
   if (clickCounter >= 25){
     renderList();
     myChart.update();
-    return  alert(' you outa clicks bro');
+    return alert(' you outa clicks bro');
   }
   // prevent duplicates
   // check whether total clicks <25
