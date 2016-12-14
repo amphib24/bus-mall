@@ -17,6 +17,9 @@ section{
   width:800px;
   margin: 0 auto;
 }
+#chart-button{
+  display: none;
+}
 /*section ul {
   list-style: none;
   position: absolute;
