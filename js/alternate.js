@@ -248,3 +248,12 @@ function buttonHandler(event){
 
 showThreePics();
 picContainer.addEventListener('click', handleClick);
+
+var dataStorage = JSON.stringify(allProducts)
+
+localStorage.setItem('votes', dataStorage)
+
+var returnData = JSON.parse(localStorage.votes)
+
+console.table(returnData);
+console.log(dataStorage);
