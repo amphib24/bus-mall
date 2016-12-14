@@ -3,6 +3,7 @@ var picContainer = document.getElementById('pic-container');
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
+var chartButton = document.getElementById('chart-button');
 var names = ['babysweep', 'bananacutter','boots','chair','cthulhu','dog-duck', 'dragon','ipadtpholder', 'meatballgum', 'pen', 'pet-sweep', 'r2d2luggage', 'scissors', 'shark', 'tauntaun', 'toastercoffee', 'unicorn', 'usb-page3', 'water-can', 'wine-glass'];
 
 
@@ -14,6 +15,7 @@ var oldArray = [];
 var clickCounter = 0;
 var clicked = [];
 var viewed =[];
+
 
 var ctx = document.getElementById('mychart');
 var myChart = new Chart(ctx, {
@@ -188,7 +190,10 @@ function showThreePics() {
   allProducts[newArray[1]].views += 1;
   right.src = allProducts[newArray[2]].filepath;
   allProducts[newArray[2]].views += 1;
+
 }
+
+
 
 function renderList() {
   for (var i=0; i < allProducts.length; i++){
@@ -196,6 +201,7 @@ function renderList() {
     clicked[i] = allProducts[i].clicks;
   }
   // display a list of items and total clicks/views
+
 };
 
 function handleClick(event) {
@@ -203,11 +209,6 @@ function handleClick(event) {
   //id who was clicked
   // console.log(event.target.src, 'was clicked');
   // alert for clicks not on images
-if(clickCounter === 25){
-  picContainer.removeEventListener('click', handleClick)
-  return  alert(' you outa clicks bro');
-}
-
 
   if (event.target.id === 'pic-container'){
     return alert ( 'Click on the image!!!!! Not the background!!!!');
@@ -226,12 +227,22 @@ console.log(allProducts[newArray[2]]);
 };
   // tally the click
   clickCounter += 1;
+function buttonHandler(event){
+ event.preventDefault();
 
   if (clickCounter === 25){
+    chartButton.visibility = 'visible';
     renderList();
     myChart.update();
-    // return  alert(' you outa clicks bro');
+    picContainer.removeEventListener('click', handleClick);
+    return  alert(' you outa clicks bro');
   }
+}  // return  alert(' you outa clicks bro');
+
+  // if(clickCounter >= 25){
+  //   picContainer.removeEventListener('click', handleClick)
+  //   return  alert(' you outa clicks bro');
+  // }
 
   // check whether total clicks <25
     // after 25, remove event listeners on picNames
@@ -242,5 +253,15 @@ console.log(allProducts[newArray[2]]);
   // console.log(event.target, 'was clicked');
 }
 
+
+if (clickCounter === 25){
+  chartButton.visibility = 'visible';
+}
+
+
+
+
+
 showThreePics();
 picContainer.addEventListener('click', handleClick);
+chartButton.addEventListener('click', buttonHandler);
