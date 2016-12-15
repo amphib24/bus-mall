@@ -17,6 +17,7 @@ var clicked = [];
 var viewed =[];
 
 var ctx = document.getElementById('mychart');
+
 function drawChart (){
   var myChart = new Chart(ctx, {
       type: 'bar',
@@ -149,9 +150,6 @@ function Product(name) {
   allProducts.push(this);
 }
 
-for(var i = 0; i < names.length; i++) {
-  new Product(names[i]);
-}
 // console.table(allProducts);
 function rand() {
   return Math.floor(Math.random() * allProducts.length);
@@ -210,7 +208,9 @@ function handleClick(event) {
   // console.log(event.target.src, 'was clicked');
   // alert for clicks not on images
   if(clickCounter >= 25){
+    localStorage.setItem('allProducts', JSON.stringify(allProducts));
     picContainer.removeEventListener('click', handleClick);
+
     chartButton.style.display = 'block';
     chartButton.addEventListener('click', buttonHandler);
     return alert(' you outa clicks hoe');
@@ -221,21 +221,22 @@ function handleClick(event) {
 }
   if(event.target.id === 'left'){
   allProducts[newArray[0]].clicks += 1;
-console.log(allProducts[newArray[0]]);
+
 };
 if(event.target.id === 'center'){
 allProducts[newArray[1]].clicks += 1;
-console.log(allProducts[newArray[1]]);
+
 };
 if(event.target.id === 'right'){
 allProducts[newArray[2]].clicks += 1;
-console.log(allProducts[newArray[2]]);
+
 };
   // tally the click
   clickCounter += 1;
   showThreePics();
 
 }
+
 function buttonHandler(event){
  event.preventDefault();
   renderList();
@@ -246,14 +247,19 @@ function buttonHandler(event){
 /////////////////////////////////////////////////////////////////
 
 
-showThreePics();
-picContainer.addEventListener('click', handleClick);
 
-var dataStorage = JSON.stringify(allProducts)
+    if(localStorage.allProducts){
+        var retrieveStorage = localStorage.getItem('allProducts')
+        allProducts = JSON.parse(retrieveStorage);
+        console.table(JSON.parse(retrieveStorage));
+    }
+    else {
+        for(var i=0; i < names.length; i++){
+            new Product(names[i]);
+        }
+        localStorage.setItem('allProducts', JSON.stringify(allProducts));
 
-localStorage.setItem('votes', dataStorage)
 
-var returnData = JSON.parse(localStorage.votes)
-
-console.table(returnData);
-console.log(dataStorage);
+    }
+    showThreePics();
+    picContainer.addEventListener('click', handleClick);
