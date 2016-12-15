@@ -213,7 +213,7 @@ function handleClick(event) {
 
     chartButton.style.display = 'block';
     chartButton.addEventListener('click', buttonHandler);
-    return alert(' you outa clicks hoe');
+    return alert(' you outa clicks futher Mucker');
   }
 
   if (event.target.id === 'pic-container'){
