@@ -14,7 +14,9 @@ var newArray = [];
 var oldArray = [];
 var clickCounter = 1;
 var clicked = [];
-var viewed =[];
+var viewed = [];
+
+
 
 var ctx = document.getElementById('mychart');
 function drawChart (){
@@ -152,7 +154,7 @@ function Product(name) {
 for(var i = 0; i < names.length; i++) {
   new Product(names[i]);
 }
-// console.table(allProducts);
+
 function rand() {
   return Math.floor(Math.random() * allProducts.length);
   // generate a random number between 0 and allProducts.length
@@ -197,7 +199,7 @@ function showThreePics() {
 }
 
 function renderList() {
-  for (var i=0; i < allProducts.length; i++){
+  for (var i = 0; i < allProducts.length; i++){
     viewed[i] = allProducts[i].views;
     clicked[i] = allProducts[i].clicks;
   }
@@ -213,23 +215,22 @@ function handleClick(event) {
     picContainer.removeEventListener('click', handleClick);
     chartButton.style.display = 'block';
     chartButton.addEventListener('click', buttonHandler);
-    return alert(' you outa clicks hoe');
+    return alert(' you outa clicks futha mucker');
+
   }
 
   if (event.target.id === 'pic-container'){
-    return alert ( 'Click on the image!!!!! Not the background!!!!');
-}
-  if(event.target.id === 'left'){
+    return alert ('CLICK THE DAMN PHOTO');
   allProducts[newArray[0]].clicks += 1;
-console.log(allProducts[newArray[0]]);
+};
+if(event.target.id === 'left'){
+  allProducts[newArray[0]].clicks +=1;
 };
 if(event.target.id === 'center'){
 allProducts[newArray[1]].clicks += 1;
-console.log(allProducts[newArray[1]]);
 };
 if(event.target.id === 'right'){
 allProducts[newArray[2]].clicks += 1;
-console.log(allProducts[newArray[2]]);
 };
   // tally the click
   clickCounter += 1;
@@ -243,8 +244,11 @@ function buttonHandler(event){
   picContainer.removeEventListener('click', handleClick);
 
   }
+
+
 /////////////////////////////////////////////////////////////////
 
 
-showThreePics();
-picContainer.addEventListener('click', handleClick);
+
+    showThreePics();
+    picContainer.addEventListener('click', handleClick);
