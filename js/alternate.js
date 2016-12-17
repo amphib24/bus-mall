@@ -201,6 +201,16 @@ function renderList() {
   }
   // display a list of items and total clicks/views
 };
+function list (){
+  var ulEl = document.createElement('ul');
+  for (var i=0; i < clicked.length; i++){
+    clicked[i] = allProducts[i].clicks;
+
+    var liEl = document.createElement('li');
+    liEl.textContent = clicked[i];
+    ulEl.appendChild(liEl);
+
+}
 
 function handleClick(event) {
   event.preventDefault();
@@ -210,7 +220,7 @@ function handleClick(event) {
   if(clickCounter >= 25){
     localStorage.setItem('allProducts', JSON.stringify(allProducts));
     picContainer.removeEventListener('click', handleClick);
-
+    console.log(list);
     chartButton.style.display = 'block';
     chartButton.addEventListener('click', buttonHandler);
     return alert(' you outa clicks futher Mucker');
@@ -239,6 +249,7 @@ allProducts[newArray[2]].clicks += 1;
 
 function buttonHandler(event){
  event.preventDefault();
+
   renderList();
   drawChart();
   picContainer.removeEventListener('click', handleClick);
