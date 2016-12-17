@@ -4,6 +4,7 @@ var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
 var chartButton = document.getElementById('chart-button');
+var createList = document.getElementById('picList');
 var names = ['babysweep', 'bananacutter','boots','chair','cthulhu','dog-duck', 'dragon','ipadtpholder', 'meatballgum', 'pen', 'pet-sweep', 'r2d2luggage', 'scissors', 'shark', 'tauntaun', 'toastercoffee', 'unicorn', 'usb-page3', 'water-can', 'wine-glass'];
 
 
@@ -203,14 +204,15 @@ function renderList() {
 };
 function list (){
   var ulEl = document.createElement('ul');
-  for (var i=0; i < clicked.length; i++){
-    clicked[i] = allProducts[i].clicks;
-
-    var liEl = document.createElement('li');
+  for (var i=0; i < allProducts.length; i++){
+    clicked[i] = allProducts[i].clicks.push;
+var liEl = document.createElement('li');
     liEl.textContent = clicked[i];
     ulEl.appendChild(liEl);
+    createList.appendChild(ulEl);
 
 }
+};
 
 function handleClick(event) {
   event.preventDefault();
@@ -272,5 +274,5 @@ function buttonHandler(event){
 
 
     }
-    showThreePics();
-    picContainer.addEventListener('click', handleClick);
+  showThreePics();
+  picContainer.addEventListener('click', handleClick);
