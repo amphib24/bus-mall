@@ -7,16 +7,13 @@ var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
 var chartButton = document.getElementById('chart-button');
-var names = ['babysweep', 'bananacutter','boots','chair','cthulhu','dog-duck', 'dragon','ipadtpholder', 'meatballgum', 'pen', 'pet-sweep', 'r2d2luggage', 'scissors', 'shark', 'tauntaun', 'toastercoffee', 'unicorn', 'usb-page3', 'water-can', 'wine-glass'];
+var ctx = document.getElementById('mychart');
 
+var names = ['babysweep', 'bananacutter','boots','chair','cthulhu','dog-duck', 'dragon','ipadtpholder', 'meatballgum', 'pen', 'pet-sweep', 'r2d2luggage', 'scissors', 'shark', 'tauntaun', 'toastercoffee', 'unicorn', 'usb-page3', 'water-can', 'wine-glass'];
 var allProducts = [];
-var newArray = [];
-var oldArray = [];
 var clickCounter = 1;
 var clicked = [];
 var viewed =[];
-
-var ctx = document.getElementById('mychart');
 
 function drawChart () {
   var myChart = new Chart(ctx, {
@@ -144,6 +141,7 @@ function Product(name) {
   this.filepath = 'images/' + name + '.jpg';
   this.clicks = 0;
   this.views = 0;
+  this.used = false;
   allProducts.push(this);
 }
 
@@ -151,47 +149,46 @@ function rand() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
+// function that gets three images that haven't been used previously
 function makeArrayOfThreeNumbers() {
-  oldArray[0] = newArray[0];
-  oldArray[1] = newArray[1];
-  oldArray[2] = newArray[2];
 
-  newArray[0] = rand();
+  var count = 0;
+  var tempArrayofNumbers = [];
 
-  while (newArray[0] === oldArray[0] || newArray[0] === oldArray[1] || newArray[0] === oldArray[2]){
-    // console.log(newArray, 'broken value in first position of new array');
-    newArray[0] = rand();
-    // console.log('fixed');
+  while (count < 3) {
+    var randomNumber = rand();
+
+    if (allProducts[randomNumber].used === false) {
+
+      // do stuff with the product that picked
+      var product = allProducts[randomNumber];
+      product.used = true;
+      product.views += 1;
+      tempArrayofNumbers.push(randomNumber);
+      count += 1;
+    }
+
   }
 
-  newArray[1] = rand();
-
-  while (newArray[1] === newArray[0] || newArray[1] === oldArray[0] || newArray[1] === oldArray[1] || newArray[1] === oldArray[2]){
-    // console.log(newArray, 'old broken array');
-    newArray[1] = rand();
-    // console.log('caught dupes between 1st and 2nd numbers');
+  // indexOf is key here it returns -1 if not in array
+  for (var i = 0; i < allProducts.length; i++) {
+    if (tempArrayofNumbers.indexOf(i) < 0) {
+      allProducts[i].used = false;
+    }
   }
 
-  newArray[2] = rand();
-  while (newArray[2] === newArray[0] || newArray[2] === newArray[1] || newArray[2] === oldArray[0] || newArray[2] === oldArray[1] || newArray[2] === oldArray[2]){
-    // console.log(newArray, 'old broken array');
-    newArray[2] = rand();
-    // console.log('caught a dupe with the 3rd number');
-  }
+  return tempArrayofNumbers;
 }
 
 function showThreePics() {
-  makeArrayOfThreeNumbers();
-  left.src = allProducts[newArray[0]].filepath;
-  allProducts[newArray[0]].views += 1;
-  center.src = allProducts[newArray[1]].filepath;
-  allProducts[newArray[1]].views += 1;
-  right.src = allProducts[newArray[2]].filepath;
-  allProducts[newArray[2]].views += 1;
+  var threeRandomNumbers = makeArrayOfThreeNumbers();
+  left.src = allProducts[threeRandomNumbers[0]].filepath;
+  center.src = allProducts[threeRandomNumbers[1]].filepath;
+  right.src = allProducts[threeRandomNumbers[2]].filepath;
 }
 
 function renderList() {
-  for (var i=0; i < allProducts.length; i++) {
+  for (var i = 0; i < allProducts.length; i++) {
     viewed[i] = allProducts[i].views;
     clicked[i] = allProducts[i].clicks;
   }
@@ -211,9 +208,7 @@ function list() {
 
 function handleClick(event) {
   event.preventDefault();
-  //id who was clicked
-  // console.log(event.target.src, 'was clicked');
-  // alert for clicks not on images
+
   if (clickCounter >= 25){
     localStorage.setItem('allProducts', JSON.stringify(allProducts));
     picContainer.removeEventListener('click', handleClick);
@@ -249,13 +244,11 @@ function buttonHandler(event) {
   drawChart();
   picContainer.removeEventListener('click', handleClick);
 }
-/////////////////////////////////////////////////////////////////
 
-
+// Checks local storage or create products /////////////////////////////////////
 if (localStorage.allProducts) {
     var retrieveStorage = localStorage.getItem('allProducts')
     allProducts = JSON.parse(retrieveStorage);
-    console.table(JSON.parse(retrieveStorage));
 }
 else {
   for (var i=0; i < names.length; i++) {
